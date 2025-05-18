@@ -212,5 +212,3 @@ Contributions are welcome! Fork the repository, make changes, and submit a pull 
 - [Official GitHub Actions Documentation](https://docs.github.com/en/actions)
 - [GitHub Community Forums](https://github.com/community)
 - [Learning Lab](https://lab.github.com/)
-
----
