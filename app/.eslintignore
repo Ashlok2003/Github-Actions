@@ -1,0 +1,20 @@
+# Ignore build output
+dist/
+build/
+
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# Ignore config files if you want
+# .eslintrc.js
+# eslint.config.mjs
+
+# Ignore generated lock files
+package-lock.json
+yarn.lock
+
+# Optional: ignore test coverage reports if any
+coverage/
