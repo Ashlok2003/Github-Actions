@@ -1,0 +1,33 @@
+name: Starting Github Actions
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      message:
+        description: "Message to print"
+        required: true
+        default: "Hello World"
+
+jobs:
+  hello-world:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Install Bash (Alpine uses sh by default)
+        run: apk add --no-cache bash
+
+      - name: Print Message
+        run: |
+          echo "Hello from a minimal image!"
+          echo "Message from workflow_dispatch: ${{ github.event.inputs.message }}"
