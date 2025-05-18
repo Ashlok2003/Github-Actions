@@ -1,0 +1,43 @@
+name: "Code scanning - Typescript"
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "app/**"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "app/**"
+
+jobs:
+  analyze:
+    name: Analyze code with CodeQL
+    runs-on: ubuntu-latest
+
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["javascript"]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+
+        # No autobuild needed since it’s JS/TS, but install dependencies for better analysis
+      - name: Install dependencies
+        working-directory: ./app
+        run: npm install
+
+      - name: Perform CodeQL analysis
+        uses: github/codeql-action/analyze@v3
