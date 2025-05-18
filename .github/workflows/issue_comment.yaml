@@ -4,6 +4,9 @@ on:
   issues:
     types: [opened]
 
+permissions:
+  issues: write
+
 jobs:
   comment_with_actions:
     runs-on: ubuntu-latest
@@ -14,12 +17,16 @@ jobs:
           echo '${{ toJSON(github.event) }}' | jq
         shell: bash
 
-      - name: "Create a comment"
+      - name: Create a comment
         uses: peter-evans/create-or-update-comment@v1
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
-            This is a multi-line test comment
+            This is a multi-line test comment for issue titled:
+
+            > ${{ github.event.issue.title }}
+
+            - Created by **@${{ github.event.issue.user.login }}**
             - With GitHub **Markdown** :sparkles:
             - Created by [create-or-update-comment][1]
 
